@@ -6,6 +6,7 @@ import android.os.Environment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.NumberPicker
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -66,10 +67,10 @@ class ResultOfDeal : Fragment() {
         }
         if(success) {
             try {
-                var result = view.findViewById<TextView>(R.id.edit_level).text.toString() + " "
+                var result = view.findViewById<NumberPicker>(R.id.edit_level).value.toString() + " "
                 result +=view.findViewById<TextView>(R.id.edit_suit).text.toString() + " "
-                result +=view.findViewById<TextView>(R.id.edit_result_level).text.toString() + " "
-                result += view.findViewById<TextView>(R.id.edit_player).text.toString() + " "
+                result +=view.findViewById<NumberPicker>(R.id.edit_result_level).value.toString() + " "
+                result += view.findViewById<NumberPicker>(R.id.edit_player).value.toString() + " "
 
                 sd2.appendText("\n")
                 sd2.appendText(result)
@@ -82,14 +83,41 @@ class ResultOfDeal : Fragment() {
         return success
     }
 
+   override fun onResume() {
+
+        super.onResume()
+
+
+        var numberPicker: NumberPicker = requireView().findViewById(R.id.edit_level)
+        numberPicker.setMaxValue(7);
+        numberPicker.setMinValue(1);
+        numberPicker.setValue(1);
+        numberPicker.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS // блокируем появление клавиатуры
+
+
+
+         numberPicker = requireView().findViewById(R.id.edit_result_level)
+        numberPicker.setMaxValue(13);
+        numberPicker.setMinValue(0);
+        numberPicker.setValue(7);
+        numberPicker.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS // блокируем появление клавиатуры
+
+
+        numberPicker = requireView().findViewById(R.id.edit_player)
+        numberPicker.setMaxValue(2);
+        numberPicker.setMinValue(1);
+        numberPicker.setValue(1);
+        numberPicker.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS // блокируем появление клавиатуры
+
+
+    }
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.buttonApproveContract.setOnClickListener {
-           if ( binding.editLevel.length() == 0 ||
-                binding.editPlayer.length() == 0 ||
-                binding.editResultLevel.length() == 0 ||
-                binding.editSuit.length() == 0 ) {
+           if (  binding.editSuit.length() == 0 ) {
 
                binding.errorText.setText(getString(R.string.not_enough_players))
            } else {
