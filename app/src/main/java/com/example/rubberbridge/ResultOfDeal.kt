@@ -127,22 +127,22 @@ class ResultOfDeal : Fragment() {
         }
 
         binding.buttonClubs.setOnClickListener {
-            binding.editSuit.setText("1")
+            binding.editSuit.setText("0")
             binding.errorText.setText("крести")
         }
 
         binding.buttonDiamonds.setOnClickListener {
-            binding.editSuit.setText("2")
+            binding.editSuit.setText("1")
             binding.errorText.setText("буби")
         }
 
         binding.buttonHearts.setOnClickListener {
-            binding.editSuit.setText("3")
+            binding.editSuit.setText("2")
             binding.errorText.setText("черви")
         }
 
         binding.buttonSpades.setOnClickListener {
-            binding.editSuit.setText("4")
+            binding.editSuit.setText("3")
             binding.errorText.setText("пики")
         }
 
