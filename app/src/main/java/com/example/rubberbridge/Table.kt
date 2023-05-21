@@ -95,6 +95,7 @@ class Table : Fragment() {
 
                             if(first) {
                                 sd2.writeText(line)
+                                sd2.appendText("\n")
                                 first = false
                             }
                             else {
@@ -112,8 +113,11 @@ class Table : Fragment() {
                             }
                         }
 
-                        binding.columnTopLeft.setText((robber.table.allPointsTeam1).toString())
-                        binding.columnTopRight.setText((robber.table.allPointsTeam2).toString())
+                        binding.columnBottomLeft.setText((robber.table.allPointsTeam1).toString())
+                        binding.columnBottomRight.setText((robber.table.allPointsTeam2).toString())
+
+                        binding.columnTopLeft.setText((robber.table.partPointsTeam1).toString())
+                        binding.columnTopRight.setText((robber.table.partPointsTeam2).toString())
                     }
                 } catch (e: Exception) {
                     // handle the exception
@@ -166,10 +170,11 @@ class Table : Fragment() {
 
                 binding.columnTopRight.setText("texts")
 
-                binding.columnTopLeft.setText((robber.table.allPointsTeam1).toString())
-                binding.columnTopRight.setText((robber.table.allPointsTeam2).toString())
-                binding.columnBottomLeft.setText((robber.table.partPointsTeam1).toString())
-                binding.columnBottomRight.setText((robber.table.partPointsTeam2).toString())
+                binding.columnBottomLeft.setText((robber.table.allPointsTeam1).toString())
+                binding.columnBottomRight.setText((robber.table.allPointsTeam2).toString())
+
+                binding.columnTopLeft.setText((robber.table.partPointsTeam1).toString())
+                binding.columnTopRight.setText((robber.table.partPointsTeam2).toString())
 
             } catch (e: Exception) {
                 // handle the exception
