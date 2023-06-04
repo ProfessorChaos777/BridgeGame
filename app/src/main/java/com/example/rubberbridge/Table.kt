@@ -1,5 +1,6 @@
 package com.example.rubberbridge
 
+import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -63,6 +64,18 @@ class Table : Fragment() {
 
         return result.get(0)
     }
+    fun colorGameZones(robber:Robber)
+    {
+        if(robber.table.zoneTeam1)
+            binding.columnTopLeft.setBackgroundColor(Color.RED)
+        else
+            binding.columnTopLeft.setBackgroundColor(Color.GREEN)
+
+        if(robber.table.zoneTeam2)
+            binding.columnTopRight.setBackgroundColor(Color.RED)
+        else
+            binding.columnTopRight.setBackgroundColor(Color.GREEN)
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -83,7 +96,8 @@ class Table : Fragment() {
                     val robber:Robber=Robber()
 
                     sd2.readLines().forEach {
-                        lines.addElement(it)
+                        if(it.length > 3)
+                            lines.addElement(it)
                     }
 
                     if(lines.size > 0) {
@@ -100,7 +114,6 @@ class Table : Fragment() {
                             }
                             else {
                                 sd2.appendText(line)
-                                sd2.appendText("\n")
 
                                 val words = line.split("\\s".toRegex()).toTypedArray()
 
@@ -118,6 +131,8 @@ class Table : Fragment() {
 
                         binding.columnTopLeft.setText((robber.table.partPointsTeam1).toString())
                         binding.columnTopRight.setText((robber.table.partPointsTeam2).toString())
+
+                        colorGameZones(robber)
                     }
                 } catch (e: Exception) {
                     // handle the exception
@@ -150,21 +165,22 @@ class Table : Fragment() {
                 sd2.readLines().forEach {
 
                     val str:String = it
-                    val words = it.split("\\s".toRegex()).toTypedArray()
+                    if(str.length > 4) {
+                        val words = it.split("\\s".toRegex()).toTypedArray()
 
-                    if(first) {
-                        binding.firstPair.setText(words.get(0) + "/" + words.get(1))
-                        binding.secondPair.setText(words.get(2) + "/" + words.get(3))
-                        first = false
-                    }
-                    else {
+                        if (first) {
+                            binding.firstPair.setText(words.get(0) + "/" + words.get(1))
+                            binding.secondPair.setText(words.get(2) + "/" + words.get(3))
+                            first = false
+                        } else {
 
-                        val level: Int = words.get(0).toInt()
-                        val suit: Int = words.get(1).toInt()
-                        val result: Int = words.get(2).toInt()
-                        val team: Int = words.get(3).toInt()
+                            val level: Int = words.get(0).toInt()
+                            val suit: Int = words.get(1).toInt()
+                            val result: Int = words.get(2).toInt()
+                            val team: Int = words.get(3).toInt()
 
-                        robber.addGame(Game(team, result, Contract(level, suit,0)))
+                            robber.addGame(Game(team, result, Contract(level, suit, 0)))
+                        }
                     }
                 }
 
@@ -175,6 +191,8 @@ class Table : Fragment() {
 
                 binding.columnTopLeft.setText((robber.table.partPointsTeam1).toString())
                 binding.columnTopRight.setText((robber.table.partPointsTeam2).toString())
+
+                colorGameZones(robber)
 
             } catch (e: Exception) {
                 // handle the exception
