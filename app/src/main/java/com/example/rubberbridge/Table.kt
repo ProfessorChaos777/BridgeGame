@@ -67,14 +67,14 @@ class Table : Fragment() {
     fun colorGameZones(robber:Robber)
     {
         if(robber.table.zoneTeam1)
-            binding.columnTopLeft.setBackgroundColor(Color.RED)
+            binding.layoutColumnTopLeft.setBackgroundColor(Color.RED)
         else
-            binding.columnTopLeft.setBackgroundColor(Color.GREEN)
+            binding.layoutColumnTopLeft.setBackgroundColor(Color.GREEN)
 
         if(robber.table.zoneTeam2)
-            binding.columnTopRight.setBackgroundColor(Color.RED)
+            binding.layoutColumnTopRight.setBackgroundColor(Color.RED)
         else
-            binding.columnTopRight.setBackgroundColor(Color.GREEN)
+            binding.layoutColumnTopRight.setBackgroundColor(Color.GREEN)
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -126,11 +126,11 @@ class Table : Fragment() {
                             }
                         }
 
-                        binding.columnBottomLeft.setText((robber.table.allPointsTeam1).toString())
-                        binding.columnBottomRight.setText((robber.table.allPointsTeam2).toString())
+                        binding.columnBottomLeft.setText(getString(R.string.summ_count) + (robber.table.allPointsTeam1).toString())
+                        binding.columnBottomRight.setText(getString(R.string.summ_count) + (robber.table.allPointsTeam2).toString())
 
-                        binding.columnTopLeft.setText((robber.table.partPointsTeam1).toString())
-                        binding.columnTopRight.setText((robber.table.partPointsTeam2).toString())
+                        binding.columnTopLeft.setText((robber.table.partPointsTeam1).toString() + getString(R.string.of_100))
+                        binding.columnTopRight.setText((robber.table.partPointsTeam2).toString() + getString(R.string.of_100))
 
                         colorGameZones(robber)
                     }
@@ -186,11 +186,11 @@ class Table : Fragment() {
 
                 binding.columnTopRight.setText("texts")
 
-                binding.columnBottomLeft.setText((robber.table.allPointsTeam1).toString())
-                binding.columnBottomRight.setText((robber.table.allPointsTeam2).toString())
+                binding.columnBottomLeft.setText(getString(R.string.summ_count) + (robber.table.allPointsTeam1).toString())
+                binding.columnBottomRight.setText(getString(R.string.summ_count) + (robber.table.allPointsTeam2).toString())
 
-                binding.columnTopLeft.setText((robber.table.partPointsTeam1).toString())
-                binding.columnTopRight.setText((robber.table.partPointsTeam2).toString())
+                binding.columnTopLeft.setText((robber.table.partPointsTeam1).toString() + getString(R.string.of_100))
+                binding.columnTopRight.setText((robber.table.partPointsTeam2).toString() + getString(R.string.of_100))
 
                 colorGameZones(robber)
 
