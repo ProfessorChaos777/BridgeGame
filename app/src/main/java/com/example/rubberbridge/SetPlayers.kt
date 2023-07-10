@@ -50,6 +50,8 @@ class SetPlayers : Fragment() {
             else {
 
                 val letDirectory = File(context?.getFilesDir(), "Rubber")
+
+
                 var success = true
                 if(!letDirectory.exists())
                     success = letDirectory.mkdirs()

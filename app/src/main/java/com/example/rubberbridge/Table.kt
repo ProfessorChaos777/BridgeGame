@@ -7,8 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.myapplication.Database
 import com.example.rubberbridge.databinding.FragmentTableBinding
 import java.io.File
 import java.util.*
@@ -34,12 +36,16 @@ class Table : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
+
+
+
         _binding = FragmentTableBinding.inflate(inflater, container, false)
         return binding.root
 
     }
     fun tryGetResultsFromFile(view: View): String {
         val letDirectory = File(context?.getFilesDir(), "Rubber")
+        print(context?.getFilesDir().toString())
         var success = true
         if(!letDirectory.exists())
             success = letDirectory.mkdirs()
@@ -77,10 +83,19 @@ class Table : Fragment() {
             binding.layoutColumnTopRight.setBackgroundColor(Color.GREEN)
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+
+
+
+
+
+
         super.onViewCreated(view, savedInstanceState)
 
         binding.revertLastGame.setOnClickListener {
             val letDirectory = File(context?.getFilesDir(), "Rubber")
+
+
             var success = true
             if(!letDirectory.exists())
                 success = letDirectory.mkdirs()
@@ -121,6 +136,12 @@ class Table : Fragment() {
                                 val suit: Int = words.get(1).toInt()
                                 val result: Int = words.get(2).toInt()
                                 val team: Int = words.get(3).toInt()
+
+
+
+
+
+
 
                                 robber.addGame(Game(team, result, Contract(level, suit,0)))
                             }

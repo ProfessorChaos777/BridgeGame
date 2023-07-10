@@ -8,8 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.NumberPicker
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.example.myapplication.Database
 import com.example.rubberbridge.databinding.FragmentResultOfDealBinding
 import java.io.*
 
@@ -54,6 +56,15 @@ class ResultOfDeal : Fragment() {
     }
 
     fun trySaveResultsToFile(view: View): Boolean {
+        val db = context?.openOrCreateDatabase("app.db", AppCompatActivity.MODE_PRIVATE, null)
+        val datab= Database(db)
+       // datab.createTables()
+
+        var a:Int
+        var b:Int
+        var c:Int
+        var d:Int
+
         val letDirectory = File(context?.getFilesDir(), "Rubber")
         var success = true
         if(!letDirectory.exists())
@@ -72,6 +83,15 @@ class ResultOfDeal : Fragment() {
                 result +=view.findViewById<NumberPicker>(R.id.edit_result_level).value.toString() + " "
                 result += view.findViewById<NumberPicker>(R.id.edit_player).value.toString() + " "
 
+            a=view.findViewById<NumberPicker>(R.id.edit_level).value
+        b=view.findViewById<TextView>(R.id.edit_suit).text.toString().toInt()
+        c=view.findViewById<NumberPicker>(R.id.edit_result_level).value
+        d=view.findViewById<NumberPicker>(R.id.edit_player).value
+
+
+               //datab.insertData(view.findViewById<NumberPicker>(R.id.edit_level).value,view.findViewById<TextView>(R.id.edit_suit).text.toString().toInt(),view.findViewById<NumberPicker>(R.id.edit_result_level).value,view.findViewById<NumberPicker>(R.id.edit_player).value)
+                datab.insertData(a,b,c,d)
+
                 sd2.appendText("\n")
                 sd2.appendText(result)
             } catch (e: Exception) {
@@ -82,7 +102,6 @@ class ResultOfDeal : Fragment() {
         }
         return success
     }
-
    override fun onResume() {
 
         super.onResume()
