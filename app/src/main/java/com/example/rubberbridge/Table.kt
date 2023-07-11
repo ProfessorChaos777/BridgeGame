@@ -82,13 +82,9 @@ class Table : Fragment() {
         else
             binding.layoutColumnTopRight.setBackgroundColor(Color.GREEN)
     }
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
-
-
-
-
-
 
         super.onViewCreated(view, savedInstanceState)
 
@@ -108,8 +104,11 @@ class Table : Fragment() {
             if(success) {
                 try {
                     var lines =  Vector<String>();
-                    val robber:Robber=Robber()
+                    //val robber:Robber=Robber()
+                    val db = context?.openOrCreateDatabase("app.db", AppCompatActivity.MODE_PRIVATE, null)
+                    val datab= Database(db)
 
+                    val robber:Robber=datab.getRobber()
                     sd2.readLines().forEach {
                         if(it.length > 3)
                             lines.addElement(it)
@@ -143,7 +142,7 @@ class Table : Fragment() {
 
 
 
-                                robber.addGame(Game(team, result, Contract(level, suit,0)))
+                               // robber.addGame(Game(team, result, Contract(level, suit,0)))
                             }
                         }
 
@@ -167,7 +166,7 @@ class Table : Fragment() {
             findNavController().navigate(R.id.action_Table_to_ResultOfDeal)
         }
 
-        val letDirectory = File(context?.getFilesDir(), "Rubber")
+     /*   val letDirectory = File(context?.getFilesDir(), "Rubber")
         var success = true
         if(!letDirectory.exists())
             success = letDirectory.mkdirs()
@@ -203,7 +202,13 @@ class Table : Fragment() {
                             robber.addGame(Game(team, result, Contract(level, suit, 0)))
                         }
                     }
-                }
+                }*/
+
+                val db = context?.openOrCreateDatabase("app.db", AppCompatActivity.MODE_PRIVATE, null)
+                val datab= Database(db)
+
+                val robber:Robber=datab.getRobber()
+
 
                 binding.columnTopRight.setText("texts")
 
@@ -215,12 +220,12 @@ class Table : Fragment() {
 
                 colorGameZones(robber)
 
-            } catch (e: Exception) {
+          /*  } catch (e: Exception) {
                 // handle the exception
                 success = false
                 //binding.errorText.setText(getString(R.string.create_directory_error))
             }
-        }
+        }*/
     }
 
     override fun onDestroyView() {

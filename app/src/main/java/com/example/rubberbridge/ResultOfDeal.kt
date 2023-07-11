@@ -58,14 +58,23 @@ class ResultOfDeal : Fragment() {
     fun trySaveResultsToFile(view: View): Boolean {
         val db = context?.openOrCreateDatabase("app.db", AppCompatActivity.MODE_PRIVATE, null)
         val datab= Database(db)
-       // datab.createTables()
+
 
         var a:Int
         var b:Int
         var c:Int
         var d:Int
 
-        val letDirectory = File(context?.getFilesDir(), "Rubber")
+        a=view.findViewById<NumberPicker>(R.id.edit_level).value
+        b=view.findViewById<TextView>(R.id.edit_suit).text.toString().toInt()
+        c=view.findViewById<NumberPicker>(R.id.edit_result_level).value
+        d=view.findViewById<NumberPicker>(R.id.edit_player).value
+
+        //datab.insertData(view.findViewById<NumberPicker>(R.id.edit_level).value,view.findViewById<TextView>(R.id.edit_suit).text.toString().toInt(),view.findViewById<NumberPicker>(R.id.edit_result_level).value,view.findViewById<NumberPicker>(R.id.edit_player).value)
+
+        datab.insertData(a,b,c,d)
+
+     /*   val letDirectory = File(context?.getFilesDir(), "Rubber")
         var success = true
         if(!letDirectory.exists())
             success = letDirectory.mkdirs()
@@ -83,14 +92,6 @@ class ResultOfDeal : Fragment() {
                 result +=view.findViewById<NumberPicker>(R.id.edit_result_level).value.toString() + " "
                 result += view.findViewById<NumberPicker>(R.id.edit_player).value.toString() + " "
 
-            a=view.findViewById<NumberPicker>(R.id.edit_level).value
-        b=view.findViewById<TextView>(R.id.edit_suit).text.toString().toInt()
-        c=view.findViewById<NumberPicker>(R.id.edit_result_level).value
-        d=view.findViewById<NumberPicker>(R.id.edit_player).value
-
-
-               //datab.insertData(view.findViewById<NumberPicker>(R.id.edit_level).value,view.findViewById<TextView>(R.id.edit_suit).text.toString().toInt(),view.findViewById<NumberPicker>(R.id.edit_result_level).value,view.findViewById<NumberPicker>(R.id.edit_player).value)
-                datab.insertData(a,b,c,d)
 
                 sd2.appendText("\n")
                 sd2.appendText(result)
@@ -100,7 +101,8 @@ class ResultOfDeal : Fragment() {
                 binding.errorText.setText(getString(R.string.create_directory_error))
             }
         }
-        return success
+        return success*/
+        return true
     }
    override fun onResume() {
 
