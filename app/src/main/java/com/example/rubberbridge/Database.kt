@@ -61,6 +61,17 @@ class Database constructor(_db: SQLiteDatabase?)  {
 
 
 
+    fun deleteLastRecord() {
+
+
+
+        val sqlstring = "DELETE FROM games WHERE id = (SELECT MAX(id) FROM games);"
+
+        db?.execSQL(sqlstring)
+    }
+
+
+
 
 
 

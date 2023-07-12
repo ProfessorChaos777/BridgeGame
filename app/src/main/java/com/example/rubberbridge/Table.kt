@@ -89,10 +89,11 @@ class Table : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.revertLastGame.setOnClickListener {
-            val letDirectory = File(context?.getFilesDir(), "Rubber")
-
 
             var success = true
+
+
+           /* val letDirectory = File(context?.getFilesDir(), "Rubber")
             if(!letDirectory.exists())
                 success = letDirectory.mkdirs()
 
@@ -104,11 +105,10 @@ class Table : Fragment() {
             if(success) {
                 try {
                     var lines =  Vector<String>();
-                    //val robber:Robber=Robber()
-                    val db = context?.openOrCreateDatabase("app.db", AppCompatActivity.MODE_PRIVATE, null)
-                    val datab= Database(db)
+                    val robber:Robber=Robber()
 
-                    val robber:Robber=datab.getRobber()
+
+
                     sd2.readLines().forEach {
                         if(it.length > 3)
                             lines.addElement(it)
@@ -136,15 +136,15 @@ class Table : Fragment() {
                                 val result: Int = words.get(2).toInt()
                                 val team: Int = words.get(3).toInt()
 
-
-
-
-
-
-
-                               // robber.addGame(Game(team, result, Contract(level, suit,0)))
+                                robber.addGame(Game(team, result, Contract(level, suit,0)))
                             }
-                        }
+                        }*/
+
+                        val db = context?.openOrCreateDatabase("app.db", AppCompatActivity.MODE_PRIVATE, null)
+                        val datab= Database(db)
+                        datab.deleteLastRecord()
+
+                        val robber:Robber=datab.getRobber()
 
                         binding.columnBottomLeft.setText(getString(R.string.summ_count) + (robber.table.allPointsTeam1).toString())
                         binding.columnBottomRight.setText(getString(R.string.summ_count) + (robber.table.allPointsTeam2).toString())
@@ -153,13 +153,13 @@ class Table : Fragment() {
                         binding.columnTopRight.setText((robber.table.partPointsTeam2).toString() + getString(R.string.of_100))
 
                         colorGameZones(robber)
-                    }
+              /*      }
                 } catch (e: Exception) {
                     // handle the exception
                     success = false
                     //binding.errorTextView.setText(getString(R.string.open_file_or_read_error))
                 }
-            }
+            }*/
         }
 
         binding.buttonApproveContract.setOnClickListener {
