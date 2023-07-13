@@ -18,16 +18,16 @@ class Database constructor(_db: SQLiteDatabase?)  {
 
     fun createTables (){
 
-
-        db?.execSQL("CREATE TABLE IF NOT EXISTS games (id INTEGER PRIMARY KEY AUTOINCREMENT, level INTEGER, suit INTEGER, result INTEGER, team INTEGER)")
+        //db?.execSQL("DROP TABLE games;")
+        db?.execSQL("CREATE TABLE IF NOT EXISTS games (id INTEGER PRIMARY KEY AUTOINCREMENT, level INTEGER, suit INTEGER, result INTEGER, team INTEGER, dbl INTEGER)")
         db?.execSQL("DELETE FROM games;")
     }
 
-    fun insertData(a: Int,b: Int,c: Int,d: Int ) {
+    fun insertData(a: Int,b: Int,c: Int,d: Int ,e: Int ) {
 
 
 
-        val sqlstring = "INSERT INTO games (level,suit,result,team) VALUES ("+a+","+b+","+c+","+d+");"
+        val sqlstring = "INSERT INTO games (level,suit,result,team,dbl) VALUES ("+a+","+b+","+c+","+d+","+e+");"
 
         db?.execSQL(sqlstring)
     }
@@ -47,8 +47,9 @@ class Database constructor(_db: SQLiteDatabase?)  {
             val suit: Int = query.getInt(2)
             val result: Int = query.getInt(3)
             val team: Int = query.getInt(4)
+            val dbl: Int = query.getInt(5)
 
-            robber.addGame(Game(team, result, Contract(level, suit,0)))
+            robber.addGame(Game(team, result, Contract(level, suit,dbl)))
 
         }
 

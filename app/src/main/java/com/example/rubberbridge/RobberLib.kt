@@ -115,6 +115,61 @@ class Robber(var table: Table_to_draw=Table_to_draw()) {
                 }
             }
         }
+        else
+        {
+            if(game.result >= game.contract.level + 6){
+                when(game.contract.suit){
+                    0-> pointResult.partPoints = game.contract.level * CLUBS
+                    1-> pointResult.partPoints = game.contract.level * DIAMONDS
+                    2-> pointResult.partPoints = game.contract.level * HEARTS
+                    3-> pointResult.partPoints = game.contract.level * SPADES
+                    4-> pointResult.partPoints = game.contract.level * NOTRAMP_BASE
+                }
+                pointResult.partPoints=pointResult.partPoints*2
+
+
+
+                pointResult.allPoints=(game.result - 6-game.contract.level)*100
+                if(zoneGame) pointResult.allPoints *= 2
+                pointResult.allPoints+=pointResult.partPoints
+                pointResult.allPoints+=50
+
+
+
+                pointResult.winnerteam=game.team
+            }
+            else
+            {
+
+                if(zoneGame) {
+                    when(game.contract.level + 6 - game.result){
+                        1-> pointResult.allPoints=200
+                        else-> pointResult.allPoints=300*(game.contract.level + 6 - game.result)-100
+                    }
+                }else{
+                    when(game.contract.level + 6 - game.result){
+                        1-> pointResult.allPoints=100
+                        2-> pointResult.allPoints=300
+                        3-> pointResult.allPoints=500
+                        else-> pointResult.allPoints=300*(game.contract.level + 6 - game.result)-400
+                    }
+                }
+
+                when(game.team){
+                    1-> pointResult.winnerteam = 2
+                    2-> pointResult.winnerteam = 1
+                }
+            }
+
+
+            //если реконтра
+            if(game.contract.dbl == 2){
+                pointResult.allPoints*=2
+                pointResult.partPoints*=2
+            }
+
+
+        }
 
         //шлемики
         if(game.result>=game.contract.level + 6)

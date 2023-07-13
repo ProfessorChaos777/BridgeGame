@@ -64,15 +64,17 @@ class ResultOfDeal : Fragment() {
         var b:Int
         var c:Int
         var d:Int
+        var e:Int
 
         a=view.findViewById<NumberPicker>(R.id.edit_level).value
         b=view.findViewById<TextView>(R.id.edit_suit).text.toString().toInt()
         c=view.findViewById<NumberPicker>(R.id.edit_result_level).value
         d=view.findViewById<NumberPicker>(R.id.edit_player).value
+        e=view.findViewById<NumberPicker>(R.id.edit_double).value
 
         //datab.insertData(view.findViewById<NumberPicker>(R.id.edit_level).value,view.findViewById<TextView>(R.id.edit_suit).text.toString().toInt(),view.findViewById<NumberPicker>(R.id.edit_result_level).value,view.findViewById<NumberPicker>(R.id.edit_player).value)
 
-        datab.insertData(a,b,c,d)
+        datab.insertData(a,b,c,d,e)
 
      /*   val letDirectory = File(context?.getFilesDir(), "Rubber")
         var success = true
@@ -129,6 +131,14 @@ class ResultOfDeal : Fragment() {
         numberPicker.setMinValue(1);
         numberPicker.setValue(1);
         numberPicker.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS // блокируем появление клавиатуры
+
+
+
+       numberPicker = requireView().findViewById(R.id.edit_double)
+       numberPicker.setMaxValue(2);
+       numberPicker.setMinValue(0);
+       numberPicker.setValue(0);
+       numberPicker.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS // блокируем появление клавиатуры
 
 
     }
