@@ -5,7 +5,7 @@ const val DIAMONDS = 20
 const val HEARTS = 30
 const val SPADES = 30
 const val NOTRAMP = 30
-const val NOTRAMP_BASE = 40
+const val NOTRAMP_BASE = 30
 
 const val FIRST_GAME_AWARD = 200
 const val SECOND_GAME_AWARD = 500
@@ -91,7 +91,7 @@ class Robber(var table: Table_to_draw=Table_to_draw()) {
                     1-> pointResult.partPoints = game.contract.level * DIAMONDS
                     2-> pointResult.partPoints = game.contract.level * HEARTS
                     3-> pointResult.partPoints = game.contract.level * SPADES
-                    4-> pointResult.partPoints = game.contract.level * NOTRAMP_BASE
+                    4-> pointResult.partPoints = game.contract.level * NOTRAMP+10
                 }
 
                 when(game.contract.suit){
@@ -99,7 +99,7 @@ class Robber(var table: Table_to_draw=Table_to_draw()) {
                     1-> pointResult.allPoints = (game.result - 6) * DIAMONDS
                     2-> pointResult.allPoints = (game.result - 6) * HEARTS
                     3-> pointResult.allPoints = (game.result - 6) * SPADES
-                    4-> pointResult.allPoints = (game.result - 6) * NOTRAMP_BASE
+                    4-> pointResult.allPoints = (game.result - 6) * NOTRAMP+10
                 }
 
                 pointResult.winnerteam=game.team
@@ -123,7 +123,7 @@ class Robber(var table: Table_to_draw=Table_to_draw()) {
                     1-> pointResult.partPoints = game.contract.level * DIAMONDS
                     2-> pointResult.partPoints = game.contract.level * HEARTS
                     3-> pointResult.partPoints = game.contract.level * SPADES
-                    4-> pointResult.partPoints = game.contract.level * NOTRAMP_BASE
+                    4-> pointResult.partPoints = game.contract.level * NOTRAMP+10
                 }
                 pointResult.partPoints=pointResult.partPoints*2
 
