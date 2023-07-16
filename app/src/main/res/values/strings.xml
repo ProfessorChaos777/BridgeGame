@@ -14,6 +14,14 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 
     <string name="not_enough_players">Не все игроки введены!</string>
+    <string name="suit_was_not_entered">Введите масть!</string>
+
+    <string name="clubs">Крести</string>
+    <string name="diamonds">Буби</string>
+    <string name="hearts">Черви</string>
+    <string name="spades">Пики</string>
+    <string name="no_trumps">Без козыря</string>
+
     <string name="title_activity_result_of_deal">ResultOfDeal</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>

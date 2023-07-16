@@ -20,6 +20,7 @@ import java.io.*
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
+var suit:Int = -1;
 
 /**
  * A simple [Fragment] subclass.
@@ -67,7 +68,7 @@ class ResultOfDeal : Fragment() {
         var e:Int
 
         a=view.findViewById<NumberPicker>(R.id.edit_level).value
-        b=view.findViewById<TextView>(R.id.edit_suit).text.toString().toInt()
+        b= suit
         c=view.findViewById<NumberPicker>(R.id.edit_result_level).value
         d=view.findViewById<NumberPicker>(R.id.edit_player).value
         e=view.findViewById<NumberPicker>(R.id.edit_double).value
@@ -149,8 +150,7 @@ class ResultOfDeal : Fragment() {
 
         binding.buttonApproveContract.setOnClickListener {
            if (  binding.editSuit.length() == 0 ) {
-
-               binding.errorText.setText(getString(R.string.not_enough_players))
+               binding.errorText.setText(getString(R.string.suit_was_not_entered))
            } else {
                if(trySaveResultsToFile(view))
                     findNavController().navigate(R.id.action_to_Table)
@@ -158,25 +158,29 @@ class ResultOfDeal : Fragment() {
         }
 
         binding.buttonClubs.setOnClickListener {
-            binding.editSuit.setText("0")
-            binding.errorText.setText("крести")
+            binding.editSuit.setText(getString(R.string.clubs))
+            suit = 0;
         }
 
         binding.buttonDiamonds.setOnClickListener {
-            binding.editSuit.setText("1")
-            binding.errorText.setText("буби")
+            binding.editSuit.setText(getString(R.string.diamonds))
+            suit = 1;
         }
 
         binding.buttonHearts.setOnClickListener {
-            binding.editSuit.setText("2")
-            binding.errorText.setText("черви")
+            binding.editSuit.setText(getString(R.string.hearts))
+            suit = 2;
         }
 
         binding.buttonSpades.setOnClickListener {
-            binding.editSuit.setText("3")
-            binding.errorText.setText("пики")
+            binding.editSuit.setText(getString(R.string.spades))
+            suit = 3;
         }
 
+        binding.buttonNotrump.setOnClickListener {
+            binding.editSuit.setText(getString(R.string.no_trumps))
+            suit = 4;
+        }
 
     }
 
