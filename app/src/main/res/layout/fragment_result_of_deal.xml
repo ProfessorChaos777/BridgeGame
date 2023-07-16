@@ -56,17 +56,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.9"/>
 
-   <EditText
-        android:id="@+id/edit_suit"
-        android:layout_width="80dp"
-        android:layout_height="47dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="40dp"
-        android:ems="10"
-        android:inputType="number"
-        app:layout_constraintStart_toEndOf="@+id/text_suit"
-        app:layout_constraintTop_toTopOf="parent" />
-
 
     <!--  <EditText
        android:id="@+id/edit_level"
@@ -106,11 +95,11 @@
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="104dp"
+        android:layout_marginTop="23dp"
         android:ems="10"
         android:inputType="number"
         app:layout_constraintStart_toEndOf="@+id/text_level"
-        app:layout_constraintTop_toBottomOf="@+id/edit_suit" />
+        app:layout_constraintTop_toBottomOf="@+id/button_hearts" />
 
     <NumberPicker
         android:id="@+id/edit_result_level"
@@ -148,14 +137,12 @@
 
     <TextView
         android:id="@+id/text_suit"
-        android:layout_width="140dp"
-        android:layout_height="47dp"
-        android:layout_marginTop="40dp"
+        android:layout_width="77dp"
+        android:layout_height="40dp"
         android:layout_marginStart="8dp"
-        android:layout_marginEnd="23dp"
+        android:layout_marginTop="40dp"
         android:text="Масть:"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        app:layout_constraintEnd_toStartOf="@+id/edit_suit"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -194,42 +181,66 @@
 
     <ImageButton
         android:id="@+id/button_clubs"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="14dp"
+        android:layout_width="71dp"
+        android:layout_height="67dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="19dp"
         android:src="@drawable/clubs"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_suit" />
 
     <ImageButton
         android:id="@+id/button_diamonds"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="14dp"
+        android:layout_width="71dp"
+        android:layout_height="67dp"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="19dp"
         android:src="@drawable/diamonds"
         app:layout_constraintStart_toEndOf="@+id/button_clubs"
         app:layout_constraintTop_toBottomOf="@+id/edit_suit" />
 
     <ImageButton
         android:id="@+id/button_hearts"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="14dp"
+        android:layout_width="71dp"
+        android:layout_height="67dp"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="19dp"
         android:src="@drawable/hearts"
         app:layout_constraintStart_toEndOf="@+id/button_diamonds"
         app:layout_constraintTop_toBottomOf="@+id/edit_suit" />
 
     <ImageButton
         android:id="@+id/button_spades"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
+        android:layout_width="71dp"
+        android:layout_height="67dp"
+        android:layout_marginStart="7dp"
         android:layout_marginTop="100dp"
         android:src="@drawable/spades"
         app:layout_constraintStart_toEndOf="@+id/button_hearts"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/button_notrump"
+        android:layout_width="71dp"
+        android:layout_height="67dp"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="100dp"
+        android:src="@drawable/no_trumps"
+        app:layout_constraintStart_toEndOf="@+id/button_spades"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/edit_suit"
+        android:layout_width="188dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="151dp"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/text_suit"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
