@@ -60,88 +60,48 @@ class ResultOfDeal : Fragment() {
         val db = context?.openOrCreateDatabase("app.db", AppCompatActivity.MODE_PRIVATE, null)
         val datab= Database(db)
 
+        var level:Int
+        var result_level:Int
+        var player:Int
+        var double:Int
 
-        var a:Int
-        var b:Int
-        var c:Int
-        var d:Int
-        var e:Int
+        level = view.findViewById<NumberPicker>(R.id.edit_level).value
+        result_level = view.findViewById<NumberPicker>(R.id.edit_result_level).value
+        player = view.findViewById<NumberPicker>(R.id.edit_player).value
+        double = view.findViewById<NumberPicker>(R.id.edit_double).value
 
-        a=view.findViewById<NumberPicker>(R.id.edit_level).value
-        b= suit
-        c=view.findViewById<NumberPicker>(R.id.edit_result_level).value
-        d=view.findViewById<NumberPicker>(R.id.edit_player).value
-        e=view.findViewById<NumberPicker>(R.id.edit_double).value
+        datab.insertData(level,suit,result_level,player,double)
 
-        //datab.insertData(view.findViewById<NumberPicker>(R.id.edit_level).value,view.findViewById<TextView>(R.id.edit_suit).text.toString().toInt(),view.findViewById<NumberPicker>(R.id.edit_result_level).value,view.findViewById<NumberPicker>(R.id.edit_player).value)
-
-        datab.insertData(a,b,c,d,e)
-
-     /*   val letDirectory = File(context?.getFilesDir(), "Rubber")
-        var success = true
-        if(!letDirectory.exists())
-            success = letDirectory.mkdirs()
-
-        val sd2 = File(letDirectory,"Results_file.txt")
-
-        if (!sd2.exists()) {
-            success = sd2.createNewFile()
-            binding.errorText.setText(getString(R.string.open_file_error))
-        }
-        if(success) {
-            try {
-                var result = view.findViewById<NumberPicker>(R.id.edit_level).value.toString() + " "
-                result +=view.findViewById<TextView>(R.id.edit_suit).text.toString() + " "
-                result +=view.findViewById<NumberPicker>(R.id.edit_result_level).value.toString() + " "
-                result += view.findViewById<NumberPicker>(R.id.edit_player).value.toString() + " "
-
-
-                sd2.appendText("\n")
-                sd2.appendText(result)
-            } catch (e: Exception) {
-                // handle the exception
-                success = false
-                binding.errorText.setText(getString(R.string.create_directory_error))
-            }
-        }
-        return success*/
         return true
     }
    override fun onResume() {
 
-        super.onResume()
+       super.onResume()
+
+       var numberPicker: NumberPicker = requireView().findViewById(R.id.edit_level)
+       numberPicker.setMaxValue(7);
+       numberPicker.setMinValue(1);
+       numberPicker.setValue(1);
+       numberPicker.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS // блокируем появление клавиатуры
+
+       numberPicker = requireView().findViewById(R.id.edit_result_level)
+       numberPicker.setMaxValue(13);
+       numberPicker.setMinValue(0);
+       numberPicker.setValue(7);
+       numberPicker.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS // блокируем появление клавиатуры
 
 
-        var numberPicker: NumberPicker = requireView().findViewById(R.id.edit_level)
-        numberPicker.setMaxValue(7);
-        numberPicker.setMinValue(1);
-        numberPicker.setValue(1);
-        numberPicker.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS // блокируем появление клавиатуры
-
-
-
-         numberPicker = requireView().findViewById(R.id.edit_result_level)
-        numberPicker.setMaxValue(13);
-        numberPicker.setMinValue(0);
-        numberPicker.setValue(7);
-        numberPicker.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS // блокируем появление клавиатуры
-
-
-        numberPicker = requireView().findViewById(R.id.edit_player)
-        numberPicker.setMaxValue(2);
-        numberPicker.setMinValue(1);
-        numberPicker.setValue(1);
-        numberPicker.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS // блокируем появление клавиатуры
-
-
+       numberPicker = requireView().findViewById(R.id.edit_player)
+       numberPicker.setMaxValue(2);
+       numberPicker.setMinValue(1);
+       numberPicker.setValue(1);
+       numberPicker.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS // блокируем появление клавиатуры
 
        numberPicker = requireView().findViewById(R.id.edit_double)
        numberPicker.setMaxValue(2);
        numberPicker.setMinValue(0);
        numberPicker.setValue(0);
        numberPicker.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS // блокируем появление клавиатуры
-
-
     }
 
 

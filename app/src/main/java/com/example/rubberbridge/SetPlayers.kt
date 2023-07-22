@@ -34,9 +34,6 @@ class SetPlayers : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-
-
         binding.buttonFirst.setOnClickListener {
             //var text_length = binding.editTextPlayer1.length()
 
@@ -50,8 +47,6 @@ class SetPlayers : Fragment() {
             else {
 
                 val letDirectory = File(context?.getFilesDir(), "Rubber")
-
-
                 var success = true
                 if(!letDirectory.exists())
                     success = letDirectory.mkdirs()

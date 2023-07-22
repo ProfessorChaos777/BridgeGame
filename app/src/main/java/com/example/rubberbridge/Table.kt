@@ -15,14 +15,6 @@ import com.example.rubberbridge.databinding.FragmentTableBinding
 import java.io.File
 import java.util.*
 
-//import com.example.rubberbridge.databinding.TableBinding
-
-/**
- * A simple [Fragment] subclass as the second destination in the navigation.
- */
-
-
-
 class Table : Fragment() {
 
     private var _binding: FragmentTableBinding? = null
@@ -30,54 +22,21 @@ class Table : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-
-
-
         _binding = FragmentTableBinding.inflate(inflater, container, false)
         return binding.root
-
-    }
-    fun tryGetResultsFromFile(view: View): String {
-        val letDirectory = File(context?.getFilesDir(), "Rubber")
-        print(context?.getFilesDir().toString())
-        var success = true
-        if(!letDirectory.exists())
-            success = letDirectory.mkdirs()
-
-        val sd2 = File(letDirectory,"Results.txt")
-
-        var result : List<String> = emptyList()
-
-        if (!sd2.exists()) {
-            success = sd2.createNewFile()
-            binding.errorTextView.setText(getString(R.string.open_file_error))
-        }
-        if(success) {
-            try {
-                result = sd2.readLines()
-            } catch (e: Exception) {
-                // handle the exception
-                success = false
-                binding.errorTextView.setText(getString(R.string.create_directory_error))
-            }
-        }
-
-        return result.get(0)
     }
     fun colorGameZones(robber:Robber)
     {
-        if(robber.table.zoneTeam1)
+        if(robber.table.zoneTeam[FIRST_TEAM])
             binding.layoutColumnTopLeft.setBackgroundColor(Color.RED)
         else
             binding.layoutColumnTopLeft.setBackgroundColor(Color.GREEN)
 
-        if(robber.table.zoneTeam2)
+        if(robber.table.zoneTeam[SECOND_TEAM])
             binding.layoutColumnTopRight.setBackgroundColor(Color.RED)
         else
             binding.layoutColumnTopRight.setBackgroundColor(Color.GREEN)
@@ -90,142 +49,44 @@ class Table : Fragment() {
 
         binding.revertLastGame.setOnClickListener {
 
-            var success = true
+            val db = context?.openOrCreateDatabase("app.db", AppCompatActivity.MODE_PRIVATE, null)
+            val datab= Database(db)
+            datab.deleteLastRecord()
 
+            val robber:Robber=datab.getRobber()
 
-           /* val letDirectory = File(context?.getFilesDir(), "Rubber")
-            if(!letDirectory.exists())
-                success = letDirectory.mkdirs()
+            binding.columnBottomLeft.setText(getString(R.string.summ_count) + (robber.table.allPointsTeam[FIRST_TEAM]).toString())
+            binding.columnBottomRight.setText(getString(R.string.summ_count) + (robber.table.allPointsTeam[SECOND_TEAM]).toString())
 
-            val sd2 = File(letDirectory,"Results_file.txt")
+            binding.columnTopLeft.setText((robber.table.partPointsTeam[FIRST_TEAM]).toString() + getString(R.string.of_100))
+            binding.columnTopRight.setText((robber.table.partPointsTeam[SECOND_TEAM]).toString() + getString(R.string.of_100))
 
-            if (!sd2.exists()) {
-                success = sd2.createNewFile()
-            }
-            if(success) {
-                try {
-                    var lines =  Vector<String>();
-                    val robber:Robber=Robber()
-
-
-
-                    sd2.readLines().forEach {
-                        if(it.length > 3)
-                            lines.addElement(it)
-                    }
-
-                    if(lines.size > 0) {
-                        lines.removeLast();
-
-                        var first:Boolean = true
-
-                        for (line in lines) {
-
-                            if(first) {
-                                sd2.writeText(line)
-                                sd2.appendText("\n")
-                                first = false
-                            }
-                            else {
-                                sd2.appendText(line)
-
-                                val words = line.split("\\s".toRegex()).toTypedArray()
-
-                                val level: Int = words.get(0).toInt()
-                                val suit: Int = words.get(1).toInt()
-                                val result: Int = words.get(2).toInt()
-                                val team: Int = words.get(3).toInt()
-
-                                robber.addGame(Game(team, result, Contract(level, suit,0)))
-                            }
-                        }*/
-
-                        val db = context?.openOrCreateDatabase("app.db", AppCompatActivity.MODE_PRIVATE, null)
-                        val datab= Database(db)
-                        datab.deleteLastRecord()
-
-                        val robber:Robber=datab.getRobber()
-
-                        binding.columnBottomLeft.setText(getString(R.string.summ_count) + (robber.table.allPointsTeam1).toString())
-                        binding.columnBottomRight.setText(getString(R.string.summ_count) + (robber.table.allPointsTeam2).toString())
-
-                        binding.columnTopLeft.setText((robber.table.partPointsTeam1).toString() + getString(R.string.of_100))
-                        binding.columnTopRight.setText((robber.table.partPointsTeam2).toString() + getString(R.string.of_100))
-
-                        colorGameZones(robber)
-              /*      }
-                } catch (e: Exception) {
-                    // handle the exception
-                    success = false
-                    //binding.errorTextView.setText(getString(R.string.open_file_or_read_error))
-                }
-            }*/
+            colorGameZones(robber)
         }
 
         binding.buttonApproveContract.setOnClickListener {
             findNavController().navigate(R.id.action_Table_to_ResultOfDeal)
         }
 
-     /*   val letDirectory = File(context?.getFilesDir(), "Rubber")
-        var success = true
-        if(!letDirectory.exists())
-            success = letDirectory.mkdirs()
+        val db = context?.openOrCreateDatabase("app.db", AppCompatActivity.MODE_PRIVATE, null)
+        val datab= Database(db)
 
-        val sd2 = File(letDirectory,"Results_file.txt")
+        val robber:Robber=datab.getRobber()
 
-        if (!sd2.exists()) {
-            success = sd2.createNewFile()
-        }
-        if(success) {
-            try {
-                var first:Boolean = true
+        binding.columnTopRight.setText("texts")
 
-                val robber:Robber=Robber()
+        var allPointsTeam1 = robber.table.allPointsTeam[FIRST_TEAM]
+        var allPointsTeam2 = robber.table.allPointsTeam[SECOND_TEAM]
+        var partPointsTeam1 = robber.table.partPointsTeam[FIRST_TEAM]
+        var partPointsTeam2 = robber.table.partPointsTeam[SECOND_TEAM]
 
-                sd2.readLines().forEach {
+        binding.columnBottomLeft.setText(getString(R.string.summ_count) + (allPointsTeam1).toString())
+        binding.columnBottomRight.setText(getString(R.string.summ_count) + (allPointsTeam2).toString())
 
-                    val str:String = it
-                    if(str.length > 4) {
-                        val words = it.split("\\s".toRegex()).toTypedArray()
+        binding.columnTopLeft.setText((partPointsTeam1).toString() + getString(R.string.of_100))
+        binding.columnTopRight.setText((partPointsTeam2).toString() + getString(R.string.of_100))
 
-                        if (first) {
-                            binding.firstPair.setText(words.get(0) + "/" + words.get(1))
-                            binding.secondPair.setText(words.get(2) + "/" + words.get(3))
-                            first = false
-                        } else {
-
-                            val level: Int = words.get(0).toInt()
-                            val suit: Int = words.get(1).toInt()
-                            val result: Int = words.get(2).toInt()
-                            val team: Int = words.get(3).toInt()
-
-                            robber.addGame(Game(team, result, Contract(level, suit, 0)))
-                        }
-                    }
-                }*/
-
-                val db = context?.openOrCreateDatabase("app.db", AppCompatActivity.MODE_PRIVATE, null)
-                val datab= Database(db)
-
-                val robber:Robber=datab.getRobber()
-
-
-                binding.columnTopRight.setText("texts")
-
-                binding.columnBottomLeft.setText(getString(R.string.summ_count) + (robber.table.allPointsTeam1).toString())
-                binding.columnBottomRight.setText(getString(R.string.summ_count) + (robber.table.allPointsTeam2).toString())
-
-                binding.columnTopLeft.setText((robber.table.partPointsTeam1).toString() + getString(R.string.of_100))
-                binding.columnTopRight.setText((robber.table.partPointsTeam2).toString() + getString(R.string.of_100))
-
-                colorGameZones(robber)
-
-          /*  } catch (e: Exception) {
-                // handle the exception
-                success = false
-                //binding.errorText.setText(getString(R.string.create_directory_error))
-            }
-        }*/
+        colorGameZones(robber)
     }
 
     override fun onDestroyView() {
