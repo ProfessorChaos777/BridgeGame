@@ -1,6 +1,8 @@
 package com.example.rubberbridge
 
+import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.os.Bundle
 import android.os.Environment
 import android.view.LayoutInflater
@@ -109,6 +111,11 @@ class ResultOfDeal : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.buttonApproveContract.setOnClickListener {
+
+           // val adb = AlertDialog.Builder(context)
+
+
+
            if (  binding.editSuit.length() == 0 ) {
                binding.errorText.setText(getString(R.string.suit_was_not_entered))
            } else {

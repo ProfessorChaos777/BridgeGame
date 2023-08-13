@@ -1,5 +1,6 @@
 package com.example.rubberbridge
-
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -14,6 +15,7 @@ import com.example.myapplication.Database
 import com.example.rubberbridge.databinding.FragmentTableBinding
 import java.io.File
 import java.util.*
+import kotlin.math.abs
 
 class Table : Fragment() {
 
@@ -62,6 +64,9 @@ class Table : Fragment() {
             binding.columnTopRight.setText((robber.table.partPointsTeam[SECOND_TEAM]).toString() + getString(R.string.of_100))
 
             colorGameZones(robber)
+
+
+
         }
 
         binding.buttonApproveContract.setOnClickListener {
@@ -87,6 +92,26 @@ class Table : Fragment() {
         binding.columnTopRight.setText((partPointsTeam2).toString() + getString(R.string.of_100))
 
         colorGameZones(robber)
+
+
+
+        val adb = AlertDialog.Builder(context)
+        if(robber.table.endGame){
+            // заголовок
+            adb.setTitle("Игра завершена");
+            // сообщение
+            adb.setMessage("Команда выиграла со счетом +"+abs(allPointsTeam1-allPointsTeam2));
+
+
+
+            adb.setPositiveButton("Да", DialogInterface.OnClickListener(){ dialog, which ->5 })
+            adb.setNegativeButton("Нет", DialogInterface.OnClickListener(){ dialog, which ->5 })
+
+            adb.create();
+            adb.show();
+
+        }
+
     }
 
     override fun onDestroyView() {

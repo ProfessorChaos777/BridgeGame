@@ -1,13 +1,19 @@
 package com.example.rubberbridge
 
+import android.app.AlertDialog
+import android.app.Dialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import com.example.rubberbridge.databinding.FragmentSetPlayersBinding
 import java.io.File
+
+
+
+import androidx.navigation.fragment.findNavController
 
 
 /**
@@ -36,6 +42,21 @@ class SetPlayers : Fragment() {
 
         binding.buttonFirst.setOnClickListener {
             //var text_length = binding.editTextPlayer1.length()
+//            val adb = AlertDialog.Builder(context)
+//
+//            // заголовок
+//            adb.setTitle("Игра завершена");
+//            // сообщение
+//            adb.setMessage("gffdgdfgfdfgf");
+//
+//
+//
+//            adb.setPositiveButton("Да",DialogInterface.OnClickListener(){dialog, which ->5 })
+//            adb.setNegativeButton("Нет",DialogInterface.OnClickListener(){dialog, which ->5 })
+//
+//            adb.create();
+//            adb.show();
+       // }
 
             if( binding.editTextPlayer1.length() == 0 ||
                 binding.editTextPlayer2.length() == 0 ||

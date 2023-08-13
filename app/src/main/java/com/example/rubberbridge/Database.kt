@@ -20,7 +20,7 @@ class Database constructor(_db: SQLiteDatabase?)  {
                                                             "result INTEGER,"   +
                                                             "team INTEGER,"     +
                                                             "dbl INTEGER)")
-        db?.execSQL("DELETE FROM games;")
+       // db?.execSQL("DELETE FROM games;")
     }
 
     fun insertData(level: Int,suit: Int,result: Int,player: Int ,double: Int ) {
