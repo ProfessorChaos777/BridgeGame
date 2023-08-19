@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.rubberbridge.databinding.FragmentSetPlayersBinding
 import java.io.File
@@ -14,6 +15,7 @@ import java.io.File
 
 
 import androidx.navigation.fragment.findNavController
+import com.example.myapplication.Database
 
 
 /**
@@ -66,6 +68,14 @@ class SetPlayers : Fragment() {
                 binding.errorText.setText(getString(R.string.not_enough_players))
             }
             else {
+
+                val db = context?.openOrCreateDatabase("app.db", AppCompatActivity.MODE_PRIVATE, null)
+               val datab= Database(db)
+
+              datab.insertTeam(1,binding.editTextPlayer1.text.toString(),binding.editTextPlayer2.text.toString())
+             datab.insertTeam(2,binding.editTextPlayer3.text.toString(),binding.editTextPlayer4.text.toString())
+
+
 
                 val letDirectory = File(context?.getFilesDir(), "Rubber")
                 var success = true

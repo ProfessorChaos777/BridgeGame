@@ -20,15 +20,51 @@ class Database constructor(_db: SQLiteDatabase?)  {
                                                             "result INTEGER,"   +
                                                             "team INTEGER,"     +
                                                             "dbl INTEGER)")
-       // db?.execSQL("DELETE FROM games;")
+       db?.execSQL("DELETE FROM games;")
+
+
+         db?.execSQL("CREATE TABLE IF NOT EXISTS teams (teamID INTEGER UNIQUE, " +
+               "Player1 TEXT, "   +
+              "Player2 TEXT)")
+
+
+        db?.execSQL("DELETE FROM teams;")
     }
 
-    fun insertData(level: Int,suit: Int,result: Int,player: Int ,double: Int ) {
+     fun insertData(level: Int,suit: Int,result: Int,player: Int ,double: Int ) {
 
-        val sqlstring = "INSERT INTO games (level, suit, result, team, dbl) VALUES ("+level+","+suit+","+result+","+player+","+double+");"
+      val sqlstring = "INSERT INTO games (level, suit, result, team, dbl) VALUES ("+level+","+suit+","+result+","+player+","+double+");"
 
-        db?.execSQL(sqlstring)
+      db?.execSQL(sqlstring)
     }
+
+
+      fun insertTeam(teamID: Int,Player1: String,Player2: String) {
+
+      val sqlstring = "INSERT INTO teams (teamID, Player1, Player2) VALUES ("+teamID+",'"+Player1+"','"+Player2+"');"
+
+       db?.execSQL(sqlstring)
+      }
+
+
+     fun getTeams() :MutableList<String>{
+       val query = db?.rawQuery("SELECT * FROM teams;", null)
+
+        var teamsArray: MutableList<String> = mutableListOf()
+
+      while (query?.moveToNext()==true) {
+        val teamID: Int = query.getInt(0)
+        val Player1: String = query.getString(1)
+        val Player2: String = query.getString(2)
+
+
+      teamsArray.add(Player1+"/"+Player2)
+
+     }
+
+      return teamsArray
+      }
+
 
     fun getRobber() :Robber{
         val query = db?.rawQuery("SELECT * FROM games;", null)

@@ -85,6 +85,13 @@ class Table : Fragment() {
         var partPointsTeam1 = robber.table.partPointsTeam[FIRST_TEAM]
         var partPointsTeam2 = robber.table.partPointsTeam[SECOND_TEAM]
 
+
+
+         val teams:MutableList<String> = datab.getTeams()
+
+        binding.firstPair.setText(teams[0])
+           binding.secondPair.setText(teams[1])
+
         binding.columnBottomLeft.setText(getString(R.string.summ_count) + (allPointsTeam1).toString())
         binding.columnBottomRight.setText(getString(R.string.summ_count) + (allPointsTeam2).toString())
 
