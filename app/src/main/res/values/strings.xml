@@ -34,4 +34,5 @@
     <string name="open_file_error">Ошибка открытия файла!</string>s
     <string name="summ_count">Общий счёт: </string>s
     <string name="of_100">/100</string>s
+    <string name="type_players">Переход к вводу игроков</string>s
 </resources>

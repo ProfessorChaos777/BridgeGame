@@ -54,4 +54,10 @@ class Database constructor(_db: SQLiteDatabase?)  {
 
         db?.execSQL(sqlstring)
     }
+
+    fun clearGamesTable() {
+        val sqlstring = "DELETE FROM games;"
+
+        db?.execSQL(sqlstring)
+    }
 }

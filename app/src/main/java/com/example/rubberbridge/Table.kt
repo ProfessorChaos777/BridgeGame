@@ -21,6 +21,9 @@ class Table : Fragment() {
 
     private var _binding: FragmentTableBinding? = null
 
+    companion object {
+        var userApprovedEndOfGame:Boolean = false
+    }
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -44,33 +47,65 @@ class Table : Fragment() {
             binding.layoutColumnTopRight.setBackgroundColor(Color.GREEN)
     }
 
+    fun endGame() {
+        binding.revertLastGame.setText(R.string.type_players)
+        userApprovedEndOfGame = true
 
+        binding.columnBottomLeft.setText("")
+        binding.columnBottomRight.setText("")
+
+        binding.columnTopLeft.setText("")
+        binding.columnTopRight.setText("")
+
+        val db =
+            context?.openOrCreateDatabase("app.db", AppCompatActivity.MODE_PRIVATE, null)
+        val datab = Database(db)
+        datab.clearGamesTable()
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         super.onViewCreated(view, savedInstanceState)
 
         binding.revertLastGame.setOnClickListener {
+            if(userApprovedEndOfGame)
+            {
+                userApprovedEndOfGame = false
+                findNavController().navigate(R.id.action_Table_to_SetPlayers)
+            }
+            else {
+                val db =
+                    context?.openOrCreateDatabase("app.db", AppCompatActivity.MODE_PRIVATE, null)
+                val datab = Database(db)
+                datab.deleteLastRecord()
 
-            val db = context?.openOrCreateDatabase("app.db", AppCompatActivity.MODE_PRIVATE, null)
-            val datab= Database(db)
-            datab.deleteLastRecord()
+                val robber: Robber = datab.getRobber()
 
-            val robber:Robber=datab.getRobber()
+                binding.columnBottomLeft.setText(getString(R.string.summ_count) + (robber.table.allPointsTeam[FIRST_TEAM]).toString())
+                binding.columnBottomRight.setText(getString(R.string.summ_count) + (robber.table.allPointsTeam[SECOND_TEAM]).toString())
 
-            binding.columnBottomLeft.setText(getString(R.string.summ_count) + (robber.table.allPointsTeam[FIRST_TEAM]).toString())
-            binding.columnBottomRight.setText(getString(R.string.summ_count) + (robber.table.allPointsTeam[SECOND_TEAM]).toString())
+                binding.columnTopLeft.setText(
+                    (robber.table.partPointsTeam[FIRST_TEAM]).toString() + getString(
+                        R.string.of_100
+                    )
+                )
+                binding.columnTopRight.setText(
+                    (robber.table.partPointsTeam[SECOND_TEAM]).toString() + getString(
+                        R.string.of_100
+                    )
+                )
 
-            binding.columnTopLeft.setText((robber.table.partPointsTeam[FIRST_TEAM]).toString() + getString(R.string.of_100))
-            binding.columnTopRight.setText((robber.table.partPointsTeam[SECOND_TEAM]).toString() + getString(R.string.of_100))
+                colorGameZones(robber)
 
-            colorGameZones(robber)
-
-
-
+                binding.revertLastGame.setText(R.string.enter_result)
+                binding.buttonApproveContract.setEnabled(true);
+                userApprovedEndOfGame = false
+            }
         }
 
         binding.buttonApproveContract.setOnClickListener {
+            userApprovedEndOfGame = false
             findNavController().navigate(R.id.action_Table_to_ResultOfDeal)
+            binding.buttonApproveContract.setEnabled(true);
         }
 
         val db = context?.openOrCreateDatabase("app.db", AppCompatActivity.MODE_PRIVATE, null)
@@ -93,25 +128,25 @@ class Table : Fragment() {
 
         colorGameZones(robber)
 
-
-
-        val adb = AlertDialog.Builder(context)
+        val pop_up_end_game = AlertDialog.Builder(context)
         if(robber.table.endGame){
             // заголовок
-            adb.setTitle("Игра завершена");
+            pop_up_end_game.setTitle("Игра завершена");
             // сообщение
-            adb.setMessage("Команда выиграла со счетом +"+abs(allPointsTeam1-allPointsTeam2));
+            pop_up_end_game.setMessage("Команда выиграла со счетом +"+abs(allPointsTeam1-allPointsTeam2) + "\n Начать новую игру?");
+            pop_up_end_game.setPositiveButton("Да", DialogInterface.OnClickListener(){
+                    dialog, which ->5
+                endGame()
+            })
 
+            pop_up_end_game.setNegativeButton("Нет", DialogInterface.OnClickListener(){
+                    dialog, which ->5
+                binding.buttonApproveContract.setEnabled(false);
+            })
 
-
-            adb.setPositiveButton("Да", DialogInterface.OnClickListener(){ dialog, which ->5 })
-            adb.setNegativeButton("Нет", DialogInterface.OnClickListener(){ dialog, which ->5 })
-
-            adb.create();
-            adb.show();
-
+            pop_up_end_game.create();
+            pop_up_end_game.show();
         }
-
     }
 
     override fun onDestroyView() {
