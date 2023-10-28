@@ -67,7 +67,7 @@ class Table : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.revertLastGame.setOnClickListener {
-            if(userApprovedEndOfGame)
+            if(userApprovedEndOfGame || binding.revertLastGame.getText() == "Переход к вводу игроков")
             {
                 userApprovedEndOfGame = false
                 findNavController().navigate(R.id.action_Table_to_SetPlayers)
@@ -99,6 +99,12 @@ class Table : Fragment() {
                 binding.revertLastGame.setText(R.string.enter_result)
                 binding.buttonApproveContract.setEnabled(true);
                 userApprovedEndOfGame = false
+
+                if( robber.table.allPointsTeam[FIRST_TEAM] == 0 && robber.table.allPointsTeam[SECOND_TEAM] == 0 &&
+                    robber.table.partPointsTeam[FIRST_TEAM] == 0 && robber.table.partPointsTeam[SECOND_TEAM] == 0 )
+                {
+                    binding.revertLastGame.setText(R.string.type_players);
+                }
             }
         }
 
@@ -127,6 +133,12 @@ class Table : Fragment() {
         binding.columnTopRight.setText((partPointsTeam2).toString() + getString(R.string.of_100))
 
         colorGameZones(robber)
+
+        if(allPointsTeam1 == 0 && allPointsTeam2 == 0 &&
+            partPointsTeam1 == 0 && partPointsTeam2 == 0 )
+        {
+            binding.revertLastGame.setText(R.string.type_players)
+        }
 
         val pop_up_end_game = AlertDialog.Builder(context)
         if(robber.table.endGame){
