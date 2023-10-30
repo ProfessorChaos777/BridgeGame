@@ -35,30 +35,14 @@ class SetPlayers : Fragment() {
     ): View? {
 
         _binding = FragmentSetPlayersBinding.inflate(inflater, container, false)
-        return binding.root
 
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.buttonFirst.setOnClickListener {
-            //var text_length = binding.editTextPlayer1.length()
-//            val adb = AlertDialog.Builder(context)
-//
-//            // заголовок
-//            adb.setTitle("Игра завершена");
-//            // сообщение
-//            adb.setMessage("gffdgdfgfdfgf");
-//
-//
-//
-//            adb.setPositiveButton("Да",DialogInterface.OnClickListener(){dialog, which ->5 })
-//            adb.setNegativeButton("Нет",DialogInterface.OnClickListener(){dialog, which ->5 })
-//
-//            adb.create();
-//            adb.show();
-       // }
 
             if( binding.editTextPlayer1.length() == 0 ||
                 binding.editTextPlayer2.length() == 0 ||
@@ -110,6 +94,15 @@ class SetPlayers : Fragment() {
                     findNavController().navigate(R.id.action_SetPlayers_to_Table)
                 }
             }
+        }
+
+        val db =
+            context?.openOrCreateDatabase("app.db", AppCompatActivity.MODE_PRIVATE, null)
+        val datab = Database(db)
+        val robber: Robber = datab.getRobber()
+        if(!robber.games.isEmpty())
+        {
+            findNavController().navigate(R.id.action_SetPlayers_to_Table)
         }
     }
 
