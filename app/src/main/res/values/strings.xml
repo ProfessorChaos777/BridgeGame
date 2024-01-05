@@ -4,6 +4,7 @@
     <!-- Strings used for fragments for navigation -->
     <string name="set_players_label">Ввод игроков</string>
     <string name="table_label">Таблица результатов</string>
+    <string name="table_of_games_for_pair">Таблица игр для пары</string>
     <string name="enter_results">Ввод результатов</string>
     <string name="enter_result">Ввести результат</string>
 
@@ -21,6 +22,8 @@
     <string name="hearts">Черви</string>
     <string name="spades">Пики</string>
     <string name="no_trumps">Без козыря</string>
+    <string name="contra">под контрой</string>
+    <string name="redouble">под реконтрой</string>
 
     <string name="title_activity_result_of_deal">ResultOfDeal</string>
     <!-- Strings used for fragments for navigation -->
@@ -35,4 +38,5 @@
     <string name="summ_count">Общий счёт: </string>s
     <string name="of_100">/100</string>s
     <string name="type_players">Переход к вводу игроков</string>s
+    <string name="detailed_table">Подробная таблица</string>s
 </resources>

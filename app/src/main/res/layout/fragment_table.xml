@@ -18,20 +18,20 @@
 
     <Button
         android:id="@+id/revert_last_game"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="186dp"
+        android:layout_height="47dp"
 
 
         android:background="@drawable/btn_style"
 
         android:text="@string/revert_last_game"
         app:backgroundTint="@color/blue"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.469"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintVertical_bias="0.75"/>
+        app:layout_constraintVertical_bias="0.741" />
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/layout_column_top_left"
@@ -110,22 +110,22 @@
    app:layout_constraintStart_toEndOf="@+id/column_bottom_left"
    app:layout_constraintTop_toBottomOf="@+id/layout_column_top_right" />
 
-<Button
-   android:id="@+id/button_approve_contract"
-   android:layout_width="wrap_content"
-   android:layout_height="wrap_content"
+    <Button
+        android:id="@+id/button_approve_contract"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
 
-   android:background="@drawable/btn_style"
-   android:text="@string/enter_result"
-   app:backgroundTint="@color/blue"
-   app:layout_constraintBottom_toBottomOf="parent"
-   app:layout_constraintEnd_toEndOf="parent"
-   app:layout_constraintHorizontal_bias="0.5"
-   app:layout_constraintStart_toStartOf="parent"
-   app:layout_constraintTop_toTopOf="parent"
-   app:layout_constraintVertical_bias="0.9"/>
+        android:background="@drawable/btn_style"
+        android:text="@string/enter_result"
+        app:backgroundTint="@color/blue"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.44"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.647" />
 
-<com.google.android.material.textfield.TextInputLayout
+    <com.google.android.material.textfield.TextInputLayout
    android:layout_width="409dp"
    android:layout_height="wrap_content"
    android:layout_marginStart="1dp"
@@ -163,5 +163,19 @@
         android:text="second pair"
         app:layout_constraintStart_toEndOf="@+id/first_pair"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button_detailed_table"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="146dp"
+        android:layout_marginTop="27dp"
+        android:layout_marginEnd="171dp"
+        android:layout_marginBottom="102dp"
+        android:text="@string/detailed_table"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/revert_last_game" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

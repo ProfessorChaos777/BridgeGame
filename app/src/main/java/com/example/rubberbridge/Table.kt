@@ -114,6 +114,12 @@ class Table : Fragment() {
             binding.buttonApproveContract.setEnabled(true);
         }
 
+        binding.buttonDetailedTable.setOnClickListener {
+            val args = Bundle()
+            args.putInt("pair", 1)
+            findNavController().navigate(R.id.action_Table_DetailedGamesForTeam)
+        }
+
         val db = context?.openOrCreateDatabase("app.db", AppCompatActivity.MODE_PRIVATE, null)
         val datab= Database(db)
 
@@ -166,6 +172,14 @@ class Table : Fragment() {
             pop_up_end_game.create();
             pop_up_end_game.show();
         }
+
+        /*binding.layoutColumnTopLeft.setOnLongClickListener() {
+            findNavController().navigate(R.id.action_Table_DetailedGamesForTeam)
+            true
+        }*/
+
+
+
     }
 
     override fun onDestroyView() {

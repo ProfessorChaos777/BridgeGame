@@ -114,8 +114,6 @@ class ResultOfDeal : Fragment() {
 
            // val adb = AlertDialog.Builder(context)
 
-
-
            if (  binding.editSuit.length() == 0 ) {
                binding.errorText.setText(getString(R.string.suit_was_not_entered))
            } else {
