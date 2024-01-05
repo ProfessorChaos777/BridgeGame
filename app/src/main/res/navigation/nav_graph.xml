@@ -42,6 +42,9 @@
         <action
             android:id="@+id/action_Table_to_ResultOfDeal"
             app:destination="@id/ResultOfDeal" />
+        <action
+            android:id="@+id/action_Table_DetailedGamesForTeam"
+            app:destination="@id/DetailedTableResults" />
     </fragment>
 
     <fragment
@@ -53,4 +56,15 @@
             android:id="@+id/action_to_Table"
             app:destination="@id/Table" />
     </fragment>
+
+    <fragment
+        android:id="@+id/DetailedTableResults"
+        android:name="com.example.rubberbridge.DetailedTableResults"
+        android:label="@string/table_of_games_for_pair">
+
+        <action
+            android:id="@+id/action_to_Table"
+            app:destination="@id/Table" />
+    </fragment>
+
 </navigation>

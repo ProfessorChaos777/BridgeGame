@@ -57,38 +57,6 @@
         app:layout_constraintVertical_bias="0.9"/>
 
 
-    <!--  <EditText
-       android:id="@+id/edit_level"
-        android:layout_width="80dp"
-        android:layout_height="47dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="130dp"
-        android:ems="10"
-        android:inputType="number"
-        app:layout_constraintStart_toEndOf="@+id/text_level"
-        app:layout_constraintTop_toBottomOf="@+id/edit_suit" />
-
-     <EditText
-         android:id="@+id/edit_result_level"
-         android:layout_width="80dp"
-         android:layout_height="47dp"
-         android:layout_marginStart="10dp"
-         android:layout_marginTop="30dp"
-         android:ems="10"
-         android:inputType="number"
-         app:layout_constraintStart_toEndOf="@+id/textView4"
-         app:layout_constraintTop_toBottomOf="@+id/edit_level" />
-
-     <EditText
-         android:id="@+id/edit_player"
-         android:layout_width="80dp"
-         android:layout_height="47dp"
-         android:layout_marginStart="10dp"
-         android:layout_marginTop="30dp"
-         android:ems="10"
-         android:inputType="number"
-         app:layout_constraintStart_toEndOf="@+id/textView5"
-         app:layout_constraintTop_toBottomOf="@+id/edit_result_level" />-->
 
     <NumberPicker
         android:id="@+id/edit_level"
