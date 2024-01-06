@@ -51,9 +51,10 @@ class Robber(var table: Table_to_draw=Table_to_draw()) {
                     table.endGame = true
                     //геймовая премия
                     table.allPointsTeam[pointResult.winnerteam] += SECOND_GAME_AWARD
-                }else{
-                    table.partPointsTeam[pointResult.winnerteam] = 0
-                    table.partPointsTeam[pointResult.winnerteam] = 0
+                }
+                else{
+                    table.partPointsTeam[0] = 0
+                    table.partPointsTeam[1] = 0
                     table.zoneTeam[pointResult.winnerteam] = true
                     //геймовая премия
                     table.allPointsTeam[pointResult.winnerteam] += FIRST_GAME_AWARD
@@ -127,7 +128,8 @@ class Robber(var table: Table_to_draw=Table_to_draw()) {
                         1-> pointResult.allPoints=200
                         else-> pointResult.allPoints=300*(game.contract.level + 6 - game.result) - 100
                     }
-                }else{
+                }
+                else{
                     when(game.contract.level + 6 - game.result){
                         1-> pointResult.allPoints=100
                         2-> pointResult.allPoints=300
